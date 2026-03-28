@@ -3,10 +3,12 @@ import os
 from sklearn.model_selection import train_test_split
 
 if os.getenv("USING_HPC") == "1":
+  # To change the path, just change this line. The rest of the code will automatically adapt to it.
   base_path = "/home/bmitra/processed/androzoo_pickles_chirantan"
 else:
   base_path = "pruned_graphs_chirantan"
 
+dataset_name = base_path.split("/")[-1]
 benign_dir = os.path.join(base_path, "benign")
 malware_dir = os.path.join(base_path, "malicious")
 
@@ -32,16 +34,16 @@ X_train, X_val, Y_train, Y_val = train_test_split(
 
 
 if os.getenv("USING_HPC") == "1":
-  benchmark_train = "/home/bmitra/Benchmarks/benchmark_train.txt"
-  benchmark_test = "/home/bmitra/Benchmarks/benchmark_test.txt"
-  benchmark_val = "/home/bmitra/Benchmarks/benchmark_validation.txt"
-  benchmark_stats = "/home/bmitra/Benchmarks/benchmark_stats.txt"
+  benchmark_train = f"/home/bmitra/Benchmarks/{dataset_name}/benchmark_train.txt"
+  benchmark_test = f"/home/bmitra/Benchmarks/{dataset_name}/benchmark_test.txt"
+  benchmark_val = f"/home/bmitra/Benchmarks/{dataset_name}/benchmark_validation.txt"
+  benchmark_stats = f"/home/bmitra/Benchmarks/{dataset_name}/benchmark_stats.txt"
 
 else:
-  benchmark_train = "benchmark_train.txt"
-  benchmark_test = "benchmark_test.txt"
-  benchmark_val = "benchmark_validation.txt"
-  benchmark_stats = "benchmark_stats.txt"
+  benchmark_train = f"{dataset_name}/benchmark_train.txt"
+  benchmark_test = f"{dataset_name}/benchmark_test.txt"
+  benchmark_val = f"{dataset_name}/benchmark_validation.txt"
+  benchmark_stats = f"{dataset_name}/benchmark_stats.txt"
 
 with open(benchmark_stats, "w") as f_stats:
   f_stats.write(f"Total samples: {len(X)}\n")

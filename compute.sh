@@ -4,11 +4,11 @@
 #SBATCH -n 4
 #SBATCH --mem 200000M
 #SBATCH -t 4-0:0
-#SBATCH --job-name="Organising pyg_out_dir"
-#SBATCH --chdir=/home/bmitra/Rakshita/bphc-malware-analysis
-#SBATCH -o /home/bmitra/Rakshita/jobs/%j-%x/out.out
-#SBATCH -e /home/bmitra/Rakshita/jobs/%j-%x/err.err
-#SBATCH --mail-user=f20232010@hyderabad.bits-pilani.ac.in
+#SBATCH --job-name="Generating benchmark dataset"
+#SBATCH --chdir=/home/bmitra/Benchmarks/code/fp_benchmarking
+#SBATCH -o /home/bmitra/Benchmarks/jobs/%j-%x/out.out
+#SBATCH -e /home/bmitra/Benchmarks/jobs/%j-%x/err.err
+#SBATCH --mail-user=f20230154@hyderabad.bits-pilani.ac.in
 #SBATCH --mail-type=ALL
 module load anaconda3-2021.05-gcc-8.5.0-i5w2nbn
 
@@ -18,6 +18,6 @@ conda activate malware_analysis
 
 export USING_HPC=1
 
-cd /home/bmitra/Rakshita/bphc-malware-analysis
+cd /home/bmitra/Benchmarks/code/fp_benchmarking
 
-python smol_script.py 1 1 0
+python benchmark_gen_all.py
