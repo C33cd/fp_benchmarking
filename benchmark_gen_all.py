@@ -34,12 +34,14 @@ X_train, X_val, Y_train, Y_val = train_test_split(
 
 
 if os.getenv("USING_HPC") == "1":
+  os.mkdir(f"/home/bmitra/Benchmarks/{dataset_name}", exist_ok=True)
   benchmark_train = f"/home/bmitra/Benchmarks/{dataset_name}/benchmark_train.txt"
   benchmark_test = f"/home/bmitra/Benchmarks/{dataset_name}/benchmark_test.txt"
   benchmark_val = f"/home/bmitra/Benchmarks/{dataset_name}/benchmark_validation.txt"
   benchmark_stats = f"/home/bmitra/Benchmarks/{dataset_name}/benchmark_stats.txt"
 
 else:
+  os.mkdir(f"{dataset_name}", exist_ok=True)
   benchmark_train = f"{dataset_name}/benchmark_train.txt"
   benchmark_test = f"{dataset_name}/benchmark_test.txt"
   benchmark_val = f"{dataset_name}/benchmark_validation.txt"
