@@ -20,4 +20,4 @@ export USING_HPC=1
 
 cd /home/bmitra/Benchmarks/code/fp_benchmarking
 
-python rename_script.py
+python rename_script.py --path

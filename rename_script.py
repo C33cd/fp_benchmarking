@@ -1,10 +1,24 @@
 import os
+import argparse
 
-if os.getenv("USING_HPC") == "1":
-  # To change the path, just change this line. The rest of the code will automatically adapt to it.
-  base_path = ""
-else:
-  base_path = "g_test"
+
+def get_base_path() -> str:
+  parser = argparse.ArgumentParser(description="Rename dataset files with split and label prefixes.")
+  parser.add_argument(
+    "--path",
+    type=str,
+    help="Base dataset path to use when running on HPC (USING_HPC=1).",
+  )
+  args = parser.parse_args()
+
+  if os.getenv("USING_HPC") == "1":
+    if not args.path:
+      parser.error("When USING_HPC=1, --path is required.")
+    return args.path
+
+  return "g_test"
+
+base_path = get_base_path()
 
 dir = ["train", "test", "validation"]
 
