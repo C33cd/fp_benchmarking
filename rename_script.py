@@ -30,6 +30,8 @@ for d in dir:
   os.makedirs(f"{base_path}/{d}/benign", exist_ok=True)
   os.makedirs(f"{base_path}/{d}/malicious", exist_ok=True)
   for file in os.listdir(f"{base_path}/{d}/benign"):
-    os.rename(f"{base_path}/{d}/benign/{file}", f"{base_path}/{d}/benign/{data_name}_{d[:5]}_ben_{file}")
+    if not file.startswith(f"{data_name}_{d[:5]}_ben_"):
+        os.rename(f"{base_path}/{d}/benign/{file}", f"{base_path}/{d}/benign/{data_name}_{d[:5]}_ben_{file}")
   for file in os.listdir(f"{base_path}/{d}/malicious"):
-    os.rename(f"{base_path}/{d}/malicious/{file}", f"{base_path}/{d}/malicious/{data_name}_{d[:5]}_mal_{file}")
+    if not file.startswith(f"{data_name}_{d[:5]}_mal_"):
+        os.rename(f"{base_path}/{d}/malicious/{file}", f"{base_path}/{d}/malicious/{data_name}_{d[:5]}_mal_{file}")
